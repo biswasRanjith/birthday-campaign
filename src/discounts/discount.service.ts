@@ -3,18 +3,14 @@ import discounts from '../mock-data/discountCoupon.json';
 
 @Injectable()
 export class DiscountService {
-  private readonly discounts = discounts;
   private readonly logger = new Logger(DiscountService.name);
-
+  private readonly discountPercentages = [60, 50, 40, 30, 20, 10]; // Decreasing percentages
  
-  async getActiveBirthdayDiscount(customerId: number): Promise<any | null> {
-    if (!customerId || customerId <= 0) {
-      this.logger.error(`Invalid customerId: ${customerId}`);
-      throw new Error('Invalid customer ID.');
-    }
+  private readonly discounts = discounts;
 
-    if (!Array.isArray(this.discounts)) {
-      this.logger.error('Discount data is not loaded or invalid.');
+  async getActiveBirthdayDiscount(customerId: string): Promise<any | null> {
+    if (!customerId) {
+      this.logger.error('Invalid customerId');
       return null;
     }
 
@@ -22,71 +18,37 @@ export class DiscountService {
 
     return this.discounts.find(
       (discount) =>
-        discount.customerId === customerId &&
+        discount.customerId === Number(customerId) &&
         discount.type === 'birthday' &&
         discount.validFrom <= today &&
         discount.validTo >= today &&
-        (discount.status === 'active' || discount.status === 'redeemed'),
-    );
+        (discount.status === 'active'),
+    ) || null;
   }
 
-  
-  async saveDiscountCode(discount: {
-    customerId: number;
-    code: string;
-    validFrom: Date;
-    validTo: Date;
-    status: string;
-    type: string;
-  }): Promise<void> {
-    // Validate input fields
-    if (!discount.customerId || discount.customerId <= 0) {
-      this.logger.error('Invalid customerId provided.');
-      throw new Error('Invalid customer ID.');
+  async getUsedCodesCount(customerId: string): Promise<number> {
+    if (!customerId) {
+      this.logger.error('Invalid customerId');
+      return 0;
     }
 
-    if (!discount.code) {
-      this.logger.error('Discount code is missing.');
-      throw new Error('Discount code cannot be empty.');
+    return this.discounts.filter(
+      discount => discount.customerId === Number(customerId) && discount.type === 'birthday',
+    ).length;
+  }
+
+  async saveDiscountCode(discount: any): Promise<void> {
+    if (!discount || !discount.customerId || !discount.customerEmail || !discount.code || !discount.validFrom || !discount.validTo || !discount.status || !discount.type) {
+      this.logger.error('Invalid discount object');
+      return;
     }
 
-    if (!['active', 'redeemed', 'expired'].includes(discount.status)) {
-      this.logger.error(`Invalid discount status: ${discount.status}`);
-      throw new Error('Invalid discount status.');
-    }
-
-    if (!discount.type) {
-      this.logger.error('Discount type is missing.');
-      throw new Error('Discount type cannot be empty.');
-    }
-
-    if (isNaN(discount.validFrom.getTime()) || isNaN(discount.validTo.getTime())) {
-      this.logger.error('Invalid date provided for validFrom or validTo.');
-      throw new Error('ValidFrom and ValidTo must be valid dates.');
-    }
-
-    // Check for duplicate discounts
-    const existingDiscount = this.discounts.find(
-      (d) =>
-        d.customerId === discount.customerId &&
-        d.type === discount.type &&
-        d.validFrom === discount.validFrom.toISOString() &&
-        d.validTo === discount.validTo.toISOString(),
-    );
-
-    if (existingDiscount) {
-      this.logger.warn(
-        `Duplicate discount for customerId ${discount.customerId} and type ${discount.type}.`,
-      );
-      return; 
-    }
-
-    // Save the new discount
     const newDiscount = {
-      couponId: Date.now(), 
+      couponId: Date.now(),
       customerId: discount.customerId,
+      customerEmail: discount.customerEmail,
       code: discount.code,
-      validFrom: discount.validFrom.toISOString(), 
+      validFrom: discount.validFrom.toISOString(),
       validTo: discount.validTo.toISOString(),
       status: discount.status,
       type: discount.type,
@@ -94,5 +56,27 @@ export class DiscountService {
 
     this.discounts.push(newDiscount);
     this.logger.log('Saved new discount:', newDiscount);
+  }
+
+  async getAllActiveDiscounts(): Promise<any[]> {
+    const now = new Date();
+    return this.discounts.filter(
+      discount => new Date(discount.validTo) > now && discount.status === 'active',
+    );
+  }
+
+  generateDiscountCode(customerId: string, usedCodesCount: number): string {
+    if (!customerId) {
+      this.logger.error('Invalid customerId');
+      return '';
+    }
+
+    if (usedCodesCount < 0 || usedCodesCount >= this.discountPercentages.length) {
+      this.logger.error('Invalid usedCodesCount');
+      usedCodesCount = Math.min(Math.max(usedCodesCount, 0), this.discountPercentages.length - 1);
+    }
+
+    const percentage = this.discountPercentages[usedCodesCount];
+    return `BDAY-${customerId}-${percentage}-${Date.now()}`;
   }
 }
