@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "email": "biswasranjith755@gmail.com",
+      "birthday": "2025-01-22",
+      "sex": "female"
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "email": "ranjithbiswas.2@gmail.com",
+      "birthday": "2025-01-23",
+      "sex": "male"
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "email": "halmathkrupa@gmali.com",
+      "birthday":"2025-01-22",
+      "sex":"male"
+    },
+    {
+      "id": 4,
+      "name": "Brown Hay",
+      "email": "halmathkrupa@gmali.com",
+      "birthday":"2025-01-22",
+      "sex":"male"
+    }
+  ]
+  

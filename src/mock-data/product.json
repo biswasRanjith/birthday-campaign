@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "name": "Organic Almonds",
+      "category": "Snacks",
+      "price": 10.99,
+      "description": "Fresh, organic almonds packed with nutrients.",
+      "tags": ["healthy", "nuts", "organic"],
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Dark Chocolate Bar",
+      "category": "Confectionery",
+      "price": 2.99,
+      "description": "Rich dark chocolate with 70% cocoa content.",
+      "tags": ["chocolate", "sweet", "snack"],
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Granola Bars",
+      "category": "Snacks",
+      "price": 4.49,
+      "description": "A pack of 5 healthy and delicious granola bars.",
+      "tags": ["healthy", "energy", "snack"],
+      "available": true
+    },
+    {
+      "id": 4,
+      "name": "Greek Yogurt",
+      "category": "Dairy",
+      "price": 3.99,
+      "description": "Creamy and delicious Greek yogurt, high in protein.",
+      "tags": ["yogurt", "dairy", "healthy"],
+      "available": false
+    },
+    {
+      "id": 5,
+      "name": "Honey Roasted Peanuts",
+      "category": "Snacks",
+      "price": 5.99,
+      "description": "Sweet and crunchy peanuts roasted with honey.",
+      "tags": ["nuts", "sweet", "snack"],
+      "available": true
+    },
+    {
+      "id": 6,
+      "name": "Instant Oatmeal",
+      "category": "Breakfast",
+      "price": 3.49,
+      "description": "Quick and easy oatmeal, perfect for a healthy breakfast.",
+      "tags": ["breakfast", "healthy", "fiber"],
+      "available": true
+    },
+    {
+      "id": 7,
+      "name": "Apple Juice",
+      "category": "Beverages",
+      "price": 2.49,
+      "description": "Refreshing apple juice made from 100% real apples.",
+      "tags": ["juice", "beverage", "healthy"],
+      "available": true
+    },
+    {
+      "id": 8,
+      "name": "Protein Shake",
+      "category": "Beverages",
+      "price": 3.99,
+      "description": "A high-protein shake to fuel your workouts.",
+      "tags": ["protein", "fitness", "beverage"],
+      "available": true
+    },
+    {
+      "id": 9,
+      "name": "Organic Honey",
+      "category": "Pantry",
+      "price": 7.99,
+      "description": "Pure organic honey, perfect for cooking or tea.",
+      "tags": ["honey", "organic", "sweetener"],
+      "available": true
+    },
+    {
+      "id": 10,
+      "name": "Gluten-Free Bread",
+      "category": "Bakery",
+      "price": 4.99,
+      "description": "Soft and delicious bread, perfect for gluten-free diets.",
+      "tags": ["bread", "gluten-free", "bakery"],
+      "available": false
+    }
+  ]
+  
