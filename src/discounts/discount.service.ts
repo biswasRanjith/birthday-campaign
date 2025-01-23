@@ -73,7 +73,7 @@ export class DiscountService {
 
     if (usedCodesCount < 0 || usedCodesCount >= this.discountPercentages.length) {
       this.logger.error('Invalid usedCodesCount');
-      usedCodesCount = Math.min(Math.max(usedCodesCount, 0), this.discountPercentages.length - 1);
+      usedCodesCount = 60-usedCodesCount*10
     }
 
     const percentage = this.discountPercentages[usedCodesCount];
