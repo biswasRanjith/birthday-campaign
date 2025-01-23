@@ -16,7 +16,7 @@ export class SchedulerService {
     private readonly discountService: DiscountService
   ) {}
 
-  @Cron('0 0 * * *') // Every day at midnight
+  @Cron('0 0 * * *')// Every day at midnight
   async triggerCampaign() {
     this.logger.debug('Triggering campaign');
 
@@ -61,7 +61,7 @@ export class SchedulerService {
     }
   }
 
-  @Cron('0 0 * * *') // Every day at midnight
+  @Cron('0 12 * * *') // Every day at 12 PM
   async sendReminders() {
     this.logger.debug('Sending reminder emails');
 

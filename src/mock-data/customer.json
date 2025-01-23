@@ -3,28 +3,28 @@
       "id": 1,
       "name": "Alice Johnson",
       "email": "biswasranjith755@gmail.com",
-      "birthday": "2025-01-22",
+      "birthday": "2025-01-25",
       "sex": "female"
     },
     {
       "id": 2,
       "name": "Bob Smith",
       "email": "ranjithbiswas.2@gmail.com",
-      "birthday": "2025-01-23",
+      "birthday": "2025-01-25",
       "sex": "male"
     },
     {
       "id": 3,
       "name": "Charlie Brown",
       "email": "halmathkrupa@gmali.com",
-      "birthday":"2025-01-22",
+      "birthday":"2025-01-26",
       "sex":"male"
     },
     {
       "id": 4,
       "name": "Brown Hay",
       "email": "halmathkrupa@gmali.com",
-      "birthday":"2025-01-22",
+      "birthday":"2025-01-27",
       "sex":"male"
     }
   ]
