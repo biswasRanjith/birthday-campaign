@@ -35,7 +35,7 @@ export class CustomerService {
         return false;
       }
 
-      birthday.setFullYear(today.getFullYear()); // Adjust year for comparison
+      birthday.setFullYear(today.getFullYear());
       return birthday >= today && birthday <= nextWeek;
     });
 
@@ -44,5 +44,20 @@ export class CustomerService {
     }
 
     return upcomingBirthdays;
+  }
+
+  getCustomerById(customerId: number): any {
+    if (!customerId || customerId <= 0) {
+      this.logger.error(`Invalid customerId provided: ${customerId}`);
+      throw new Error('Invalid customer ID for fetching customer details.');
+    }
+
+    const customer = this.customers.find((c) => c.id === customerId);
+
+    if (!customer) {
+      this.logger.warn(`Customer with ID ${customerId} not found.`);
+    }
+
+    return customer;
   }
 }

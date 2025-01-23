@@ -72,10 +72,11 @@ export class SchedulerService {
     const reminderTime = new Date(now.setDate(now.getDate() + 1)); // 24 hours before expiration
 
     for (const discount of discounts) {
+      const customerEmail = this.customerService.getCustomerById(discount.customerId).email;
       const validTo = new Date(discount.validTo);
       if (validTo <= reminderTime && validTo > now) {
         const timeLeft = Math.ceil((validTo.getTime() - now.getTime()) / (1000 * 60 * 60)) + ' hours';
-        await this.emailService.sendReminderEmail(discount.customerEmail, discount.code, timeLeft);
+        await this.emailService.sendReminderEmail(customerEmail, discount.code, timeLeft);
 
         this.logger.debug(`Reminder email sent to ${discount.customerEmail} for discount code ${discount.code}`);
       }
